@@ -6,6 +6,7 @@ import lombok.Getter;
 import lombok.ToString;
 
 import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.time.YearMonth;
 import java.util.Map;
 import java.util.TreeMap;
@@ -50,7 +51,7 @@ public class Security {
 
     public BigDecimal lastMonthsPerformance(YearMonth currentMonth, int momentumPeriod) {
         return priceHistory.get(currentMonth).getAmount()
-                .subtract(priceHistory.get(currentMonth.minusMonths(momentumPeriod)).getAmount());
+                .divide(priceHistory.get(currentMonth.minusMonths(momentumPeriod)).getAmount(), RoundingMode.UP);
     }
 
 }
